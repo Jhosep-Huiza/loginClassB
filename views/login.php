@@ -50,7 +50,7 @@ $error = $_GET['error'] ?? '';
             <button type="submit" class="btn-login">LOGIN</button>
         </form>
 
-        <a href="#" class="crear-cuenta">Create Account</a>
+        <a href="register.php" class="crear-cuenta">Create Account</a>
     </div>
 
     <script src="../resources/js/app.js"></script>
