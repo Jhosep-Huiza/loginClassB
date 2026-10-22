@@ -44,7 +44,7 @@ $error = $_GET['error'] ?? '';
                     <input type="checkbox" name="remember" checked>
                     <span>Remember</span>
                 </label>
-                <a href="#">Forgot password ?</a>
+                <a href="recuperar.php">Forgot password ?</a>
             </div>
 
             <button type="submit" class="btn-login">LOGIN</button>
