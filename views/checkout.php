@@ -1,37 +1,22 @@
-﻿
-<?php
+﻿<?php
 session_start();
-require_once "conexion.php";
 
 if (empty($_SESSION["usuario"])) {
-    header("Location: index.php");
+    header("Location: login.php");
     exit();
 }
 
-$productos = [
-    1  => ["nombre" => "Espresso Italiano", "precio" => 6.00],
-    2  => ["nombre" => "Café Americano", "precio" => 7.50],
-    3  => ["nombre" => "Capuccino Creme", "precio" => 9.50],
-    4  => ["nombre" => "Iced Latte Caramel", "precio" => 11.00],
-    5  => ["nombre" => "Frappé de Moka", "precio" => 13.50],
-    6  => ["nombre" => "Torta de Fudge", "precio" => 10.00],
-    7  => ["nombre" => "Torta de Fresa", "precio" => 9.00],
-    8  => ["nombre" => "Chocolate Caliente", "precio" => 10.00],
-    9  => ["nombre" => "Torta Tres Leches", "precio" => 11.00],
-    10 => ["nombre" => "Frappé de Fresa", "precio" => 12.00],
-    11 => ["nombre" => "Té Helado de Durazno", "precio" => 8.50],
-    12 => ["nombre" => "Pastel Red Velvet", "precio" => 12.50]
-];
+$productos = require __DIR__ . '/../config/productos.php';
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    header("Location: bienvenido.php");
+    header("Location: menu.php");
     exit();
 }
 
 $producto_id = filter_input(INPUT_POST, "producto_id", FILTER_VALIDATE_INT);
 
 if (!$producto_id || !isset($productos[$producto_id])) {
-    header("Location: bienvenido.php");
+    header("Location: menu.php");
     exit();
 }
 
@@ -123,7 +108,7 @@ button:hover{filter:brightness(1.12)}
 <body>
 <div class="container">
     <div class="top">
-        <a href="bienvenido.php">← Volver al menú</a>
+        <a href="menu.php">← Volver al menú</a>
         <span>☕ COFFEE EXPERIENCE</span>
     </div>
 
@@ -139,7 +124,7 @@ button:hover{filter:brightness(1.12)}
             <div class="price">S/ <?= number_format($producto["precio"], 2) ?></div>
         </div>
 
-        <form action="views/confirmar_compra.php" method="POST">
+        <form action="confirmar_compra.php" method="POST">
             <input type="hidden" name="producto_id" value="<?= (int)$producto_id ?>">
 
             <div class="grid">
@@ -244,4 +229,3 @@ actualizarTotal();
 </script>
 </body>
 </html>
-

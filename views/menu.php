@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+// Solo usuarios con sesión iniciada
+if (empty($_SESSION['usuario'])) {
+    header('Location: login.php');
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -126,8 +132,8 @@ session_start();
 <body>
 <div class="menu-container">
     <div class="top-actions">
-        <?php if (!empty($_SESSION['usuario_id'])): ?>
-            <a class="btn-logout" href="logout.php">Cerrar sesión</a>
+        <?php if (!empty($_SESSION['usuario'])): ?>
+            <a class="btn-logout" href="../controllers/AuthController.php?logout=1">Cerrar sesión</a>
         <?php endif; ?>
     </div>
 
@@ -144,7 +150,7 @@ session_start();
                 <div class="product-content"><div class="product-info">
                     <h3>Espresso Italiano</h3><p>Extracción intensa de granos seleccionados con una capa de crema avellanada perfecta.</p>
                 </div><div class="product-footer"><span class="price">S/. 6.00</span>
-                    <form action="procesar_compra.php" method="POST"><input type="hidden" name="producto_id" value="1"><button type="submit" class="btn-buy">COMPRAR</button></form>
+                    <form action="checkout.php" method="POST"><input type="hidden" name="producto_id" value="1"><button type="submit" class="btn-buy">COMPRAR</button></form>
                 </div></div>
             </article>
             <article class="product-card">
@@ -152,7 +158,7 @@ session_start();
                 <div class="product-content"><div class="product-info">
                     <h3>Café Americano</h3><p>Espresso clásico suavizado con agua caliente, ideal para balancear notas sutiles.</p>
                 </div><div class="product-footer"><span class="price">S/. 7.50</span>
-                    <form action="procesar_compra.php" method="POST"><input type="hidden" name="producto_id" value="2"><button type="submit" class="btn-buy">COMPRAR</button></form>
+                    <form action="checkout.php" method="POST"><input type="hidden" name="producto_id" value="2"><button type="submit" class="btn-buy">COMPRAR</button></form>
                 </div></div>
             </article>
             <article class="product-card">
@@ -160,7 +166,7 @@ session_start();
                 <div class="product-content"><div class="product-info">
                     <h3>Capuccino Creme</h3><p>Equilibrio perfecto de espresso, leche vaporizada y una densa corona de espuma.</p>
                 </div><div class="product-footer"><span class="price">S/. 9.50</span>
-                    <form action="procesar_compra.php" method="POST"><input type="hidden" name="producto_id" value="3"><button type="submit" class="btn-buy">COMPRAR</button></form>
+                    <form action="checkout.php" method="POST"><input type="hidden" name="producto_id" value="3"><button type="submit" class="btn-buy">COMPRAR</button></form>
                 </div></div>
             </article>
             <article class="product-card">
@@ -168,7 +174,7 @@ session_start();
                 <div class="product-content"><div class="product-info">
                     <h3>Chocolate Caliente</h3><p>Chocolate cremoso preparado con leche caliente y un delicado toque de cacao.</p>
                 </div><div class="product-footer"><span class="price">S/. 10.00</span>
-                    <form action="procesar_compra.php" method="POST"><input type="hidden" name="producto_id" value="8"><button type="submit" class="btn-buy">COMPRAR</button></form>
+                    <form action="checkout.php" method="POST"><input type="hidden" name="producto_id" value="8"><button type="submit" class="btn-buy">COMPRAR</button></form>
                 </div></div>
             </article>
         </div>
@@ -182,7 +188,7 @@ session_start();
                 <div class="product-content"><div class="product-info">
                     <h3>Iced Latte Caramel</h3><p>Café espresso vertido sobre leche fría, hielo y un toque artesanal de jarabe de caramelo.</p>
                 </div><div class="product-footer"><span class="price">S/. 11.00</span>
-                    <form action="procesar_compra.php" method="POST"><input type="hidden" name="producto_id" value="4"><button type="submit" class="btn-buy">COMPRAR</button></form>
+                    <form action="checkout.php" method="POST"><input type="hidden" name="producto_id" value="4"><button type="submit" class="btn-buy">COMPRAR</button></form>
                 </div></div>
             </article>
             <article class="product-card">
@@ -190,7 +196,7 @@ session_start();
                 <div class="product-content"><div class="product-info">
                     <h3>Frappé de Moka</h3><p>Bebida granizada de café blended con salsa de chocolate de la casa y crema batida.</p>
                 </div><div class="product-footer"><span class="price">S/. 13.50</span>
-                    <form action="procesar_compra.php" method="POST"><input type="hidden" name="producto_id" value="5"><button type="submit" class="btn-buy">COMPRAR</button></form>
+                    <form action="checkout.php" method="POST"><input type="hidden" name="producto_id" value="5"><button type="submit" class="btn-buy">COMPRAR</button></form>
                 </div></div>
             </article>
             <article class="product-card">
@@ -198,7 +204,7 @@ session_start();
                 <div class="product-content"><div class="product-info">
                     <h3>Frappé de Fresa</h3><p>Bebida fría y cremosa de fresa, mezclada con hielo y un toque de leche.</p>
                 </div><div class="product-footer"><span class="price">S/. 12.00</span>
-                    <form action="procesar_compra.php" method="POST"><input type="hidden" name="producto_id" value="10"><button type="submit" class="btn-buy">COMPRAR</button></form>
+                    <form action="checkout.php" method="POST"><input type="hidden" name="producto_id" value="10"><button type="submit" class="btn-buy">COMPRAR</button></form>
                 </div></div>
             </article>
             <article class="product-card">
@@ -206,7 +212,7 @@ session_start();
                 <div class="product-content"><div class="product-info">
                     <h3>Té Helado de Durazno</h3><p>Té refrescante servido con hielo y un delicado sabor frutal a durazno.</p>
                 </div><div class="product-footer"><span class="price">S/. 8.50</span>
-                    <form action="procesar_compra.php" method="POST"><input type="hidden" name="producto_id" value="11"><button type="submit" class="btn-buy">COMPRAR</button></form>
+                    <form action="checkout.php" method="POST"><input type="hidden" name="producto_id" value="11"><button type="submit" class="btn-buy">COMPRAR</button></form>
                 </div></div>
             </article>
         </div>
@@ -220,7 +226,7 @@ session_start();
                 <div class="product-content"><div class="product-info">
                     <h3>Torta de Fudge</h3><p>Bizcocho de chocolate con una suave cobertura de fudge, ideal para acompañar tu café.</p>
                 </div><div class="product-footer"><span class="price">S/. 10.00</span>
-                    <form action="procesar_compra.php" method="POST"><input type="hidden" name="producto_id" value="6"><button type="submit" class="btn-buy">COMPRAR</button></form>
+                    <form action="checkout.php" method="POST"><input type="hidden" name="producto_id" value="6"><button type="submit" class="btn-buy">COMPRAR</button></form>
                 </div></div>
             </article>
             <article class="product-card">
@@ -228,7 +234,7 @@ session_start();
                 <div class="product-content"><div class="product-info">
                     <h3>Torta de Fresa</h3><p>Pastel suave con crema y fresas, una opción dulce y fresca para cualquier momento.</p>
                 </div><div class="product-footer"><span class="price">S/. 9.00</span>
-                    <form action="procesar_compra.php" method="POST"><input type="hidden" name="producto_id" value="7"><button type="submit" class="btn-buy">COMPRAR</button></form>
+                    <form action="checkout.php" method="POST"><input type="hidden" name="producto_id" value="7"><button type="submit" class="btn-buy">COMPRAR</button></form>
                 </div></div>
             </article>
             <article class="product-card">
@@ -236,7 +242,7 @@ session_start();
                 <div class="product-content"><div class="product-info">
                     <h3>Torta Tres Leches</h3><p>Bizcocho esponjoso bañado en tres leches, con una textura suave y cremosa.</p>
                 </div><div class="product-footer"><span class="price">S/. 11.00</span>
-                    <form action="procesar_compra.php" method="POST"><input type="hidden" name="producto_id" value="9"><button type="submit" class="btn-buy">COMPRAR</button></form>
+                    <form action="checkout.php" method="POST"><input type="hidden" name="producto_id" value="9"><button type="submit" class="btn-buy">COMPRAR</button></form>
                 </div></div>
             </article>
             <article class="product-card">
@@ -244,7 +250,7 @@ session_start();
                 <div class="product-content"><div class="product-info">
                     <h3>Pastel Red Velvet</h3><p>Pastel de cacao suave con su característico color rojo y una cremosa cobertura de queso.</p>
                 </div><div class="product-footer"><span class="price">S/. 12.50</span>
-                    <form action="procesar_compra.php" method="POST"><input type="hidden" name="producto_id" value="12"><button type="submit" class="btn-buy">COMPRAR</button></form>
+                    <form action="checkout.php" method="POST"><input type="hidden" name="producto_id" value="12"><button type="submit" class="btn-buy">COMPRAR</button></form>
                 </div></div>
             </article>
         </div>

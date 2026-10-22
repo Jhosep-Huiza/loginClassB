@@ -1,3 +1,5 @@
-
 # Archivos de respaldo
 *.bak
+
+# Credenciales locales (usa config/database.example.php como plantilla)
+config/database.php

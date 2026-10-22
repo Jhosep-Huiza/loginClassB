@@ -1,33 +1,19 @@
-﻿```php
-<?php
+﻿<?php
 session_start();
 
-require_once __DIR__ . "/conexion.php";
+require_once __DIR__ . "/../config/conexion.php";
 
 if (empty($_SESSION["usuario"])) {
-    header("Location: index.php");
+    header("Location: login.php");
     exit();
 }
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    header("Location: ../bienvenido.php");
+    header("Location: menu.php");
     exit();
 }
 
-$productos = [
-    1  => ["nombre" => "Espresso Italiano", "precio" => 6.00],
-    2  => ["nombre" => "Café Americano", "precio" => 7.50],
-    3  => ["nombre" => "Capuccino Creme", "precio" => 9.50],
-    4  => ["nombre" => "Iced Latte Caramel", "precio" => 11.00],
-    5  => ["nombre" => "Frappé de Moka", "precio" => 13.50],
-    6  => ["nombre" => "Torta de Fudge", "precio" => 10.00],
-    7  => ["nombre" => "Torta de Fresa", "precio" => 9.00],
-    8  => ["nombre" => "Chocolate Caliente", "precio" => 10.00],
-    9  => ["nombre" => "Torta Tres Leches", "precio" => 11.00],
-    10 => ["nombre" => "Frappé de Fresa", "precio" => 12.00],
-    11 => ["nombre" => "Té Helado de Durazno", "precio" => 8.50],
-    12 => ["nombre" => "Pastel Red Velvet", "precio" => 12.50]
-];
+$productos = require __DIR__ . '/../config/productos.php';
 
 function h($valor) {
     return htmlspecialchars((string)$valor, ENT_QUOTES, "UTF-8");
@@ -259,14 +245,14 @@ try {
     </div>
 
     <p>Conserva tu número de pedido para cualquier consulta.</p>
-    <a href="../bienvenido.php">Volver al menú</a>
+    <a href="menu.php">Volver al menú</a>
 
 <?php else: ?>
 
     <h1>No se pudo guardar tu pedido</h1>
     <div class="error"><?= h($errorBD) ?></div>
     <p>Tu compra no ha sido confirmada en la base de datos.</p>
-    <a href="../bienvenido.php">Volver al menú</a>
+    <a href="menu.php">Volver al menú</a>
 
 <?php endif; ?>
 <?php endif; ?>
@@ -274,4 +260,3 @@ try {
 </main>
 </body>
 </html>
-```
