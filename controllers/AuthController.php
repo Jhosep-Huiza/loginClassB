@@ -65,9 +65,11 @@ $user = $userModel->findByUsername($username);
 if ($user && password_verify($password, $user['password'])) {
     $_SESSION['user_id']  = $user['id'];
     $_SESSION['username'] = $user['username'];
-    header("Location: ../index.php");
+
+    // Nombres que usan las páginas de la cafetería
+    $_SESSION['usuario_id'] = $user['id'];
+    $_SESSION['usuario']    = $user['username'];
+
+    header("Location: ../bienvenido.php");
     exit;
 }
-
-header("Location: ../views/login.php?error=2");
-exit;
