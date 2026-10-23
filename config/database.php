@@ -11,9 +11,9 @@ class Database
     {
         // ⚠️ Cambia estos valores por los reales
         $this->host     = 'localhost';
-        $this->dbname   = 'loginclassb';
+        $this->dbname = 'loginclassb';
         $this->username = 'root';
-        $this->password = 'jhosep_582006';
+        $this->password = '';
     }
 
     public function getConnection()
